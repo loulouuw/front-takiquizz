@@ -1,16 +1,18 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Assure-toi d'importer Router
 
 @Component({
-  selector: "epf-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"],
+  selector: 'epf-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
 
-  constructor() {
-  }
+  constructor(private router: Router) { } // Injection du Router
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
+  startQuiz(): void {
+    this.router.navigate(['/quiz']); // Redirection vers la page du quiz
+  }
 }

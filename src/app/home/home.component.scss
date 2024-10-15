@@ -1,53 +1,103 @@
-:host {
-  display: flex;
-  align-items: center;
-  margin: 25px;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f7fa;
+}
 
-  .title {
-    text-align: center;
-    font-family: Caveat, sans-serif;
-    font-size: 3.5em;
-    font-weight: 700;
-    margin: 30px 0;
+.quiz-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.header {
+  margin-bottom: 40px;
+
+  h1 {
+    font-size: 3em;
+    color: #2980b9;
+    margin-bottom: 10px;
   }
 
   p {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 1.3em;
+    font-size: 1.5em;
+    color: #34495e;
+    margin-bottom: 20px;
   }
 
-  .left {
-    width: 50%;
-    height: 100%;
-    display: flex;
+  .btn-start {
+    background-color: #2980b9;
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #3498db;
+    }
+  }
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+
+  .feature {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 30%;
+
+    .feature-img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.8em;
+      color: #2980b9;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #34495e;
+    }
+  }
+}
+
+.footer {
+  margin-top: 20px;
+  p {
+    font-size: 1.3em;
+    color: #7f8c8d;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .features {
     flex-direction: column;
 
-    .sun {
-      width: 90px;
-      margin-left: 35px;
-    }
-
-    .card {
-      border: none;
-      display: flex;
-      align-items: baseline;
-
-      .card-text {
-        font-family: "Dancing Script", sans-serif;
-        font-size: x-large;
-        margin-top: 0
-      }
+    .feature {
+      max-width: 100%;
+      margin-bottom: 20px;
     }
   }
 
-  .right {
-    width: 50%;
-    display: flex;
-    justify-content: center;
+  .header h1 {
+    font-size: 2.5em;
+  }
 
-    img {
-      width: 80%;
-    }
+  .header p {
+    font-size: 1.2em;
   }
 }
