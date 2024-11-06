@@ -1,9 +1,24 @@
 <nav>
-  <div>
+  <div class="navbar-content">
+    <!-- Logo de navigation -->
     <img src="assets/logo-blanc.png" routerLink="">
+
+    <!-- Liens de navigation -->
     <mat-nav-list>
-      <a mat-list-item routerLink="{{link.href}}" routerLinkActive="active"
+      <a mat-list-item routerLink="{{ link.href }}" routerLinkActive="active"
          *ngFor="let link of links">{{ link.name }}</a>
     </mat-nav-list>
+
+    <!-- Bouton de connexion avec menu déroulant -->
+    <div class="auth-container">
+      <button mat-button (click)="toggleDropdown()">Connexion</button>
+
+      <!-- Dropdown menu pour connexion/déconnexion -->
+      <div class="dropdown" *ngIf="showDropdown">
+        <button mat-button (click)="handleAuthAction()">
+          {{ isAuthenticated ? 'Déconnexion' : 'Se connecter' }}
+        </button>
+      </div>
+    </div>
   </div>
 </nav>
