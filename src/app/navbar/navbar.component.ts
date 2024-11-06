@@ -10,7 +10,6 @@ import { Link } from "models/links.model";
 export class NavbarComponent {
   links: Link[] = [
     { name: "Accueil", href: "" },
-    { name: "Majors", href: "majors" },
     { name: "Quiz", href: "quiz" }
   ];
   isAuthenticated: boolean = false; // Gestion de l'état de connexion
