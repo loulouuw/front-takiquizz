@@ -4,6 +4,8 @@ import { HomeComponent } from "home/home.component"
 import { QuizComponent} from "./quiz/quiz.component"
 import { ConnexionComponent } from "./connexion/connexion.component"
 import { RegisterComponent } from "./register/register.component"
+import { QuizDetailComponent } from './quiz-detail/quiz-detail.component';
+
 
 
 const routes: Routes = [
@@ -11,6 +13,8 @@ const routes: Routes = [
   { path: "connexion", component: ConnexionComponent },
   { path: 'inscription', component: RegisterComponent },
   { path: "quiz", component: QuizComponent },
+  { path: 'quiz/:id', component: QuizDetailComponent },
+
 ]
 
 @NgModule({

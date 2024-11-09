@@ -1,0 +1,14 @@
+<div *ngIf="quiz">
+  <h2>{{ quiz.title }}</h2>
+  <p>{{ quiz.description }}</p>
+  <ul>
+    <li *ngFor="let question of quiz.questions">
+      <p>{{ question.statement }} - Temps limite: {{ question.timeLimit }} secondes</p>
+      <ul>
+        <li *ngFor="let answer of ['Option 1', 'Option 2', 'Option 3', question.correctAnswer] | shuffle">
+          <p>{{ answer }}</p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

@@ -1,2 +1,15 @@
-<h2>Bienvenue au Quizz !</h2>
-<p>Réponds aux questions pour tester tes connaissances.</p>
+<div *ngIf="quizzes && quizzes.length > 0; else noQuizzes">
+  <h2>Liste des quiz</h2>
+  <ul>
+    <li *ngFor="let quiz of quizzes">
+      <h3>
+        <a [routerLink]="['/quiz', quiz.id]">{{ quiz.title }}</a>
+      </h3>
+      <p>{{ quiz.description }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noQuizzes>
+  <p>Aucun quiz disponible.</p>
+</ng-template>
