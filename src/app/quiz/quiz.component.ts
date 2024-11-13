@@ -9,7 +9,6 @@ import { Quiz } from 'models/quiz.model';
 })
 export class QuizComponent implements OnInit {
   quizzes: Quiz[] = [];
-  selectedQuiz: Quiz | null = null;  // Pour stocker le quiz sélectionné
 
   constructor(private quizService: QuizService) {}
 
@@ -23,10 +22,5 @@ export class QuizComponent implements OnInit {
         console.error('Erreur lors de la récupération des quiz:', error);
       }
     );
-  }
-
-  selectQuiz(quiz: Quiz): void {
-    this.selectedQuiz = quiz;
-    console.log('Quiz sélectionné:', this.selectedQuiz);
   }
 }

@@ -1,12 +1,16 @@
+<!-- src/app/navbar/navbar.component.html -->
 <nav>
   <div class="navbar-content">
     <!-- Logo de navigation -->
-    <img src="assets/logo-blanc.png" routerLink="">
+    <img src="assets/logo-blanc.png" routerLink="" alt="Logo" />
 
     <!-- Liens de navigation -->
     <mat-nav-list>
       <a mat-list-item routerLink="{{ link.href }}" routerLinkActive="active"
          *ngFor="let link of links">{{ link.name }}</a>
+
+      <!-- Lien vers la page de création de quiz -->
+      <a mat-list-item routerLink="/create-quiz" routerLinkActive="active">Créer un Quiz</a>
     </mat-nav-list>
 
     <!-- Bouton de connexion avec menu déroulant -->

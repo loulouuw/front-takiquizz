@@ -5,7 +5,7 @@ import { QuizComponent} from "./quiz/quiz.component"
 import { ConnexionComponent } from "./connexion/connexion.component"
 import { RegisterComponent } from "./register/register.component"
 import { QuizDetailComponent } from './quiz-detail/quiz-detail.component';
-
+import { CreateQuizComponent } from "./create-quiz/create-quiz.component"
 
 
 const routes: Routes = [
@@ -14,6 +14,8 @@ const routes: Routes = [
   { path: 'inscription', component: RegisterComponent },
   { path: "quiz", component: QuizComponent },
   { path: 'quiz/:id', component: QuizDetailComponent },
+  { path: 'create-quiz', component: CreateQuizComponent },  // Route vers la page de création de quiz
+
 
 ]
 

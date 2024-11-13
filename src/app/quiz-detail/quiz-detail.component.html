@@ -1,14 +1,26 @@
-<div *ngIf="quiz">
-  <h2>{{ quiz.title }}</h2>
-  <p>{{ quiz.description }}</p>
+<div *ngIf="currentQuestion">
+  <h2>{{ quiz?.title }}</h2>
+  <p>{{ quiz?.description }}</p>
+
+  <h3>Question {{ currentQuestionIndex + 1 }} : {{ currentQuestion.statement }}</h3>
+
   <ul>
-    <li *ngFor="let question of quiz.questions">
-      <p>{{ question.statement }} - Temps limite: {{ question.timeLimit }} secondes</p>
-      <ul>
-        <li *ngFor="let answer of ['Option 1', 'Option 2', 'Option 3', question.correctAnswer] | shuffle">
-          <p>{{ answer }}</p>
-        </li>
-      </ul>
+    <li *ngFor="let answer of answers">
+      <label>
+        <input
+          type="radio"
+          name="answer"
+          [value]="answer"
+          (change)="selectedAnswer = answer"
+        />
+        {{ answer }}
+      </label>
     </li>
   </ul>
+
+  <button (click)="submitAnswer()" [disabled]="!selectedAnswer">Valider</button>
+</div>
+
+<div *ngIf="!currentQuestion && quiz">
+  <p>Vous avez obtenu {{ score }} / {{ quiz.questions.length }} bonnes réponses.</p>
 </div>

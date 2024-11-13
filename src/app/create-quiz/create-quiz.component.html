@@ -1,0 +1,51 @@
+<div class="create-quiz-container">
+  <h2>Créer un Quiz</h2>
+
+  <!-- Formulaire pour le quiz -->
+  <form (ngSubmit)="onSubmit()" #quizForm="ngForm">
+    <div>
+      <label for="title">Titre du quiz:</label>
+      <input type="text" id="title" [(ngModel)]="quiz.title" name="title" required />
+    </div>
+
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="quiz.description" name="description" required></textarea>
+    </div>
+
+    <div>
+      <label for="timeLimitPerQuestion">Temps par question (en secondes):</label>
+      <input type="number" id="timeLimitPerQuestion" [(ngModel)]="quiz.timeLimitPerQuestion" name="timeLimitPerQuestion" required />
+    </div>
+
+    <div class="questions-section">
+      <h3>Questions :</h3>
+
+      <div *ngFor="let question of quiz.questions; let i = index">
+        <div class="question">
+          <label for="statement">Question {{i + 1}} :</label>
+          <input type="text" [(ngModel)]="question.statement" name="statement-{{i}}" required placeholder="Écrivez la question" />
+
+          <div>
+            <label for="correctAnswer">Réponse correcte :</label>
+            <input type="text" [(ngModel)]="question.correctAnswer" name="correctAnswer-{{i}}" required placeholder="Réponse correcte" />
+          </div>
+
+          <div>
+            <label for="incorrectAnswers">Mauvaises réponses (séparées par des virgules) :</label>
+            <input type="text" [(ngModel)]="question.incorrectAnswers" name="incorrectAnswers-{{i}}" required placeholder="Mauvaises réponses" />
+          </div>
+        </div>
+      </div>
+
+      <button (click)="addQuestion()" type="button">Ajouter une question</button>
+
+      <!-- Validation avant soumission -->
+      <div *ngIf="quiz.questions.length < 2">
+        <p class="error-message">Vous devez ajouter au moins 2 questions.</p>
+      </div>
+
+      <button type="submit" [disabled]="!quizForm.valid || quiz.questions.length < 2">Créer le Quiz</button>
+    </div>
+  </form>
+</div>

@@ -1,15 +1,17 @@
-<div *ngIf="quizzes && quizzes.length > 0; else noQuizzes">
-  <h2>Liste des quiz</h2>
-  <ul>
-    <li *ngFor="let quiz of quizzes">
-      <h3>
-        <a [routerLink]="['/quiz', quiz.id]">{{ quiz.title }}</a>
-      </h3>
-      <p>{{ quiz.description }}</p>
+<div class="quiz-container" *ngIf="quizzes && quizzes.length > 0; else noQuizzes">
+  <h2 class="header">Liste des quiz</h2>
+  <ul class="quiz-list">
+    <li *ngFor="let quiz of quizzes" class="quiz-item">
+      <a [routerLink]="['/quiz', quiz.id]" class="quiz-link">
+        <div class="quiz-content">
+          <h3>{{ quiz.title }}</h3>
+          <p>{{ quiz.description }}</p>
+        </div>
+      </a>
     </li>
   </ul>
 </div>
 
 <ng-template #noQuizzes>
-  <p>Aucun quiz disponible.</p>
+  <p class="no-quizzes">Aucun quiz disponible.</p>
 </ng-template>

@@ -1,92 +1,77 @@
-/* quiz.component.scss */
-
-/* Style du container principal du quiz */
 .quiz-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
-}
-
-/* Titre du quiz */
-.quiz-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
 }
 
-/* Style pour chaque question */
-.quiz-question {
-  margin-bottom: 20px;
-}
-
-.quiz-question h3 {
-  font-size: 1.5rem;
-  color: #444;
-}
-
-/* Style pour les réponses */
-.quiz-options {
+.quiz-list {
   list-style: none;
   padding: 0;
-}
-
-.quiz-options li {
-  background-color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.quiz-options li:hover {
-  background-color: #f0f0f0;
-}
-
-/* Style du bouton de soumission */
-.submit-btn {
-  display: block;
   width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  max-width: 600px;
+
+  .quiz-item {
+    margin: 10px 0;
+    transition: transform 0.2s;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    .quiz-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background-color: #f0f0f5;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #e0e0eb;
+      }
+
+      .quiz-content {
+        h3 {
+          margin: 0 0 5px;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
 
-.submit-btn:hover {
-  background-color: #45a049;
-}
-
-.submit-btn:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Style pour les messages de validation */
-.success-message {
-  color: green;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
+.no-quizzes {
   margin-top: 20px;
+  font-size: 1.2em;
+  color: #666;
 }
 
-.error-message {
-  color: red;
-  font-size: 1.2rem;
-  font-weight: bold;
+.header {
+  margin-bottom: 40px;
   text-align: center;
-  margin-top: 20px;
+
+  h2 {
+    font-size: 3em; // Taille similaire à celle de l'exemple
+    color: #2980b9; // Couleur bleue similaire
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-bottom: 20px;
+  }
 }
