@@ -34,7 +34,9 @@ export class CreateQuizComponent {
       incorrectAnswers: '',  // Les mauvaises réponses séparées par des virgules
       questionType: 'multiple_choice',  // Par défaut, type "multiple_choice"
       image: null,  // Pas d'image pour le moment
-      timeLimit: 30  // Temps par défaut
+      timeLimit: 30,  // Temps par défaut
+      quiz_id: 0,
+
     });
   }
 

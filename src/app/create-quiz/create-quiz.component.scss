@@ -1,136 +1,92 @@
-// Style amélioré du formulaire
 .create-quiz-container {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 40px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto', sans-serif;
-
-  h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
-    font-weight: 700;
-  }
-
-  .error-message {
-    color: #e74c3c;
-    font-size: 1rem;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-
-  .questions-section {
-    border-top: 2px solid #f2f2f2;
-    padding-top: 20px;
-  }
-
-  .question {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 25px;
-
-    label {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #444;
-    }
-
-    input,
-    textarea {
-      padding: 12px;
-      font-size: 1.1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      outline: none;
-      background-color: #f9f9f9;
-      transition: border 0.3s ease-in-out, background-color 0.3s ease;
-
-      &:focus {
-        border-color: #3498db;
-        background-color: #eaf7ff;
-      }
-    }
-
-    textarea {
-      height: 120px;
-      resize: vertical;
-    }
-
-    .incorrect-answers {
-      font-size: 1rem;
-      color: #555;
-    }
-  }
-
-  button {
-    padding: 14px 20px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-
-    &:hover {
-      background-color: #2980b9;
-      transform: translateY(-2px);
-    }
-
-    &:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    &.add-question {
-      background-color: #2ecc71;
-      font-size: 1rem;
-
-      &:hover {
-        background-color: #27ae60;
-      }
-    }
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-// Responsivité pour les écrans plus petits
-@media (max-width: 768px) {
-  .create-quiz-container {
-    padding: 20px;
-    width: 95%;
-  }
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  form {
-    gap: 20px;
-  }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px; /* Espace entre les champs */
+}
 
-  .question {
-    gap: 20px;
-  }
+label {
+  margin-bottom: 5px; /* Décalage entre le label et le champ */
+  font-weight: bold;
+}
 
-  label {
-    font-size: 1rem;
-  }
+input,
+textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border 0.3s;
+}
 
-  input,
-  textarea {
-    font-size: 1rem;
-  }
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+}
 
-  button {
-    padding: 12px 18px;
-    font-size: 1rem;
-  }
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+.questions-section {
+  border-top: 2px solid #e0e0e0;
+  padding-top: 20px;
+}
+
+.add-question-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.add-question-btn:hover {
+  background-color: #218838;
+}
+
+.error-message p {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+button[type="submit"] {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
