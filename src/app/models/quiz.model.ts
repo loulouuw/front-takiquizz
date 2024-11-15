@@ -5,6 +5,6 @@ export interface Quiz {
   id: number;
   title: string;
   description: string;
-  questions: Question[]; // Utilisation de l'interface Question ici
+  questions: Question[];
   timeLimitPerQuestion: number,
 }
