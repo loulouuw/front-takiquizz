@@ -6,8 +6,8 @@ import { ConnexionComponent } from "./connexion/connexion.component"
 import { RegisterComponent } from "./register/register.component"
 import { QuizDetailComponent } from './quiz-detail/quiz-detail.component';
 import { CreateQuizComponent } from "./create-quiz/create-quiz.component"
-import { AuthGuard } from './auth.guard'; // Le chemin dépend de la structure de ton projet
-
+import { AuthGuard } from './auth.guard';
+import { GameSessionService } from "./services/game-sessions.service" // Le chemin dépend de la structure de ton projet
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Route d'accueil protégée
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: "quiz", component: QuizComponent },
   { path: 'quiz/:id', component: QuizDetailComponent },
   { path: 'create-quiz', component: CreateQuizComponent },
+
 ];
 
 

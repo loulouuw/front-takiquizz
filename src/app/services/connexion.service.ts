@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {AuthService} from "./auth.service"
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnexionService {
-  private apiUrl = 'http://localhost:8080/players'; // L'URL de l'API
+  private apiUrl = 'http://localhost:8080/players';  // L'URL de l'API
+  private playerInfoKey = 'playerInfo';  // Clé pour stocker les infos du joueur dans le localStorage
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
-  // Méthode pour obtenir tous les utilisateurs et vérifier les identifiants
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // Méthode pour authentifier l'utilisateur
   authenticate(email: string, password: string): Observable<boolean> {
     return new Observable(subscriber => {
       this.getUsers().subscribe(
         users => {
           const user = users.find(u => u.email === email && u.mdp === password);
           if (user) {
-            // Connexion réussie
-            this.authService.login(); // Connecte l'utilisateur
+            const playerInfo = { username: user.username, email: user.email };
+            localStorage.setItem(this.playerInfoKey, JSON.stringify(playerInfo)); // Sauvegarde des infos dans le localStorage
             subscriber.next(true);
             subscriber.complete();
           } else {
@@ -39,5 +37,18 @@ export class ConnexionService {
         }
       );
     });
+  }
+
+  isConnected(): boolean {
+    return localStorage.getItem(this.playerInfoKey) !== null;
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.playerInfoKey);
+  }
+
+  getPlayerInfo(): { username: string, email: string } | null {
+    const playerInfo = localStorage.getItem(this.playerInfoKey);
+    return playerInfo ? JSON.parse(playerInfo) : null;
   }
 }

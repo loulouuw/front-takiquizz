@@ -19,6 +19,10 @@ export class CreateQuizComponent {
     questions: []  // Tableau de questions vide au départ
   };
 
+  removeQuestion(index: number): void {
+    this.quiz.questions.splice(index, 1);
+  }
+
   constructor(
     private quizService: QuizService,
     private router: Router  // Injecte le router pour la redirection après soumission
@@ -42,19 +46,15 @@ export class CreateQuizComponent {
 
   // Soumettre le quiz
   onSubmit(): void {
-    if (this.quiz.questions.length >= 2) {
       this.quizService.saveQuiz(this.quiz).subscribe(
         response => {
           console.log('Quiz créé avec succès', response);
           // Rediriger vers une autre page après la création
-          this.router.navigate(['/quiz-list']);  // Remplace '/quiz-list' par l'URL appropriée pour ta liste de quiz
+          this.router.navigate(['/quiz']);  // Remplace '/quiz-list' par l'URL appropriée pour ta liste de quiz
         },
         error => {
           console.error('Erreur lors de la création du quiz', error);
         }
       );
-    } else {
-      alert('Le quiz doit avoir au moins 2 questions.');
-    }
   }
 }

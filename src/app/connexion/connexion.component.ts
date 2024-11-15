@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'services/auth.service';
 import { Router } from '@angular/router';
+import { ConnexionService } from 'services/connexion.service';  // Importer le service de connexion
 
 @Component({
   selector: 'app-connexion',
@@ -12,25 +12,26 @@ export class ConnexionComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private connexionService: ConnexionService,  // Injection du service de connexion
+    private router: Router  // Pour rediriger l'utilisateur après connexion
+  ) {}
 
+  // Méthode pour gérer l'envoi du formulaire de connexion
   onSubmit(): void {
-    const loginData = {
-      email: this.email,
-      password: this.password
-    };
-
-    this.authService.login(loginData).subscribe(
-      (response) => {
-        // Si la connexion réussit, on marque l'utilisateur comme connecté
-        console.log('Connexion réussie', response);
-        this.authService.setAuthenticated(true); // Mettre isConnected à true
-        this.router.navigate(['/']); // Redirige vers la page d'accueil
+    this.connexionService.authenticate(this.email, this.password).subscribe(
+      (isAuthenticated: boolean) => {
+        if (isAuthenticated) {
+          // Connexion réussie, on redirige vers la page d'accueil ou la page de score
+          this.router.navigate(['/']);
+        } else {
+          // Connexion échouée, affichage d'un message d'erreur
+          this.errorMessage = 'Email ou mot de passe incorrect';
+        }
       },
       (error) => {
-        // Si la connexion échoue, afficher un message d'erreur
-        console.error('Erreur de connexion', error);
-        this.errorMessage = 'Email ou mot de passe incorrect';
+        console.error('Erreur lors de la connexion', error);
+        this.errorMessage = 'Une erreur est survenue lors de la connexion';
       }
     );
   }
