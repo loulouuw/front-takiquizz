@@ -16,7 +16,8 @@ export class CreateQuizComponent {
     title: '',
     description: '',
     timeLimitPerQuestion: 30,
-    questions: []  // Tableau de questions vide au départ
+    questions: [],  // Tableau de questions vide au départ
+    quizId: 0,
   };
 
   removeQuestion(index: number): void {
@@ -32,29 +33,56 @@ export class CreateQuizComponent {
   addQuestion(): void {
     // On ajoute une nouvelle question vide
     this.quiz.questions.push({
-      id: 0,  // L'ID sera généré automatiquement après la soumission
+
       statement: '',  // Le texte de la question
       correctAnswer: '',  // La bonne réponse
-      incorrectAnswers: '',  // Les mauvaises réponses séparées par des virgules
       questionType: 'multiple_choice',  // Par défaut, type "multiple_choice"
       image: null,  // Pas d'image pour le moment
       timeLimit: 30,  // Temps par défaut
-      quiz_id: 0,
+      incorrectAnswers:'',
+      quizzId: 0,
 
     });
+    console.log(this.quiz.questions)
   }
 
   // Soumettre le quiz
   onSubmit(): void {
-      this.quizService.saveQuiz(this.quiz).subscribe(
-        response => {
-          console.log('Quiz créé avec succès', response);
-          // Rediriger vers une autre page après la création
-          this.router.navigate(['/quiz']);  // Remplace '/quiz-list' par l'URL appropriée pour ta liste de quiz
-        },
-        error => {
-          console.error('Erreur lors de la création du quiz', error);
-        }
-      );
+    // Créer un objet quizData sans les questions pour l'envoi
+    const quizData: Partial<Quiz> = {
+      title: this.quiz.title,
+      description: this.quiz.description,
+    };
+
+    // Envoie du quiz sans les questions
+    this.quizService.saveQuiz(quizData).subscribe(
+      response => {
+        console.log('Quiz créé avec succès', response);
+        const quizId = response.quizId;  // Récupérer l'ID du quiz créé
+        console.log('Quiz ID:', quizId);  // Afficher l'ID dans la console
+
+        // Assigner l'ID du quiz à chaque question
+        this.quiz.questions.forEach((question, index) => {
+          question.quizzId = quizId;  // Lier chaque question au quiz
+          console.log('##################################################');
+          console.log('Question à envoyer:', question);
+          console.log('id', question.quizzId);
+
+          // Envoyer chaque question à l'API, une par une
+          this.quizService.saveQuestions(question).subscribe(
+            questionResponse => {
+              console.log(`Question ${index + 1} ajoutée avec succès`, questionResponse);
+            },
+            error => {
+              console.error(`Erreur lors de l'ajout de la question ${index + 1}`, error);
+            }
+          );
+        });
+      },
+      error => {
+        console.error('Erreur lors de la création du quiz', error);
+      }
+    );
   }
+
 }
