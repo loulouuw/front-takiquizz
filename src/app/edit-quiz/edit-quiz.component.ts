@@ -58,7 +58,6 @@ export class EditQuizComponent implements OnInit {
     }
   }
 
-  // Supprimer une question
   removeQuestion(index: number): void {
     console.log(`Tentative de suppression de la question à l'index ${index}`);
 
@@ -66,12 +65,10 @@ export class EditQuizComponent implements OnInit {
       const questionToDelete = this.selectedQuiz.questions[index];
       console.log(`Question à supprimer :`, questionToDelete);
 
-      if (questionToDelete.quizzId) { // Utilise quizzId ici
-        // Si la question a un quizzId, supprimer la question du backend
+      if (questionToDelete.quizzId) {
         this.quizService.deleteQuestion(questionToDelete.id).subscribe(
           () => {
             console.log(`Question ${index + 1} supprimée avec succès.`);
-            // Supprimer la question localement après suppression réussie dans la BDD
             this.selectedQuiz!.questions.splice(index, 1);
           },
           (error) => {
@@ -79,7 +76,6 @@ export class EditQuizComponent implements OnInit {
           }
         );
       } else {
-        // Si la question est une nouvelle question (sans quizzId), simplement la supprimer localement
         console.log(`La question est une nouvelle question, suppression locale.`);
         this.selectedQuiz!.questions.splice(index, 1);
       }
@@ -101,8 +97,7 @@ export class EditQuizComponent implements OnInit {
 
       this.quizService.saveQuiz(quizData).subscribe(
         (updatedQuiz) => {
-          console.log('IULQfiufjkupdated')
-          console.log(updatedQuiz)
+          console.log('Quiz mis à jour:', updatedQuiz);
           if (!updatedQuiz.quizId) {
             console.error('ID du quiz manquant dans la réponse');
             return;
@@ -110,21 +105,29 @@ export class EditQuizComponent implements OnInit {
 
           const updatedQuizId = updatedQuiz.quizId;
 
-          // Met à jour l'ID du quiz dans les questions
-          this.selectedQuiz!.questions.forEach((question, index) => {
-            question.quizzId = updatedQuizId; // Utilise l'ID retourné
+          console.log("Questions avant filtrage:", this.selectedQuiz!.questions);
+          const newQuestions = this.selectedQuiz!.questions.filter(
+            (question) => !question.id
+          );
+          console.log("Nouvelles questions filtrées:", newQuestions);
+
+          // Met à jour le quizzId des nouvelles questions
+          newQuestions.forEach((question, index) => {
+            question.quizzId = updatedQuizId; // Associer le quizzId aux nouvelles questions
             console.log(`Mise à jour de la question ${index + 1} avec quizzId: ${updatedQuizId}`, question);
 
-            // Envoie chaque question au service
+            // Enregistre seulement les nouvelles questions
             this.quizService.saveQuestions(question).subscribe(
               (response) => {
-                console.log(`Question ${index + 1} sauvegardée`, response);
+                console.log(`Nouvelle question ${index + 1} sauvegardée`, response);
               },
               (error) => {
-                console.error(`Erreur pour Question ${index + 1}`, error);
+                console.error(`Erreur pour la question ${index + 1}`, error);
               }
             );
           });
+
+          console.log('Quiz et nouvelles questions enregistrées');
         },
         (error) => {
           console.error('Erreur lors de la mise à jour du quiz:', error);
@@ -132,6 +135,7 @@ export class EditQuizComponent implements OnInit {
       );
     }
   }
+
 
   // Supprimer le quiz
   onDelete(): void {
