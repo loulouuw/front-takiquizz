@@ -39,6 +39,7 @@ En raison d'une mauvaise gestion du temps, certaines fonctionnalités liées à 
 
 1. Cliquez sur **Éditer un quiz** pour accéder à la liste des quiz existants.
 2. Sélectionnez un quiz dans la liste.
-3. Mettez à jour les informations du quiz selon vos besoins.
+3. Vous pouvez visualiser les informations du quiz sélectionné et les modifier, puis enregistrer les modifications.
+4. Vous pouvez également décider de supprimer le quiz.
 
 ---
