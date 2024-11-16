@@ -14,17 +14,6 @@
   <div *ngIf="selectedQuiz" class="quiz-details">
     <h2>Informations de : {{ selectedQuiz.title }}</h2>
 
-    <!-- Informations du quiz affichées -->
-    <div class="form-group">
-      <label for="quizTitle">Titre</label>
-      <input id="quizTitle" type="text" class="form-control" [(ngModel)]="selectedQuiz.title" name="title"/>
-    </div>
-
-    <div class="form-group">
-      <label for="quizDescription">Description</label>
-      <textarea id="quizDescription" class="form-control" [(ngModel)]="selectedQuiz.description" name="description"></textarea>
-    </div>
-
     <!-- Affichage des questions du quiz -->
     <div *ngIf="selectedQuiz.questions && selectedQuiz.questions.length > 0">
       <h3>Questions</h3>
@@ -44,6 +33,11 @@
         <div class="form-group">
           <label for="incorrectAnswers{{ i }}">Réponses incorrectes</label>
           <input id="incorrectAnswers{{ i }}" type="text" class="form-control" [(ngModel)]="question.incorrectAnswers" name="incorrectAnswers{{ i }}"/>
+        </div>
+
+        <!-- Bouton pour supprimer la question -->
+        <div class="form-group">
+          <button class="btn btn-danger" (click)="removeQuestion(i)">Supprimer cette question</button>
         </div>
       </div>
     </div>
