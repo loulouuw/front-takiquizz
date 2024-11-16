@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from 'services/quiz.service';
 import { Quiz } from 'models/quiz.model';
 import { Question } from 'models/question.model'; // Importer le modèle Question si ce n'est pas déjà fait
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-quiz',
@@ -13,7 +14,7 @@ export class EditQuizComponent implements OnInit {
   selectedQuiz: Quiz | null = null;
   originalQuestions: Question[] = []; // Nouvelle propriété pour stocker les questions originales
 
-  constructor(private quizService: QuizService) {}
+  constructor(private quizService: QuizService,private router: Router) {}
 
   ngOnInit(): void {
     this.loadQuizzes();
@@ -184,6 +185,7 @@ export class EditQuizComponent implements OnInit {
           });
 
           console.log('Quiz, nouvelles questions et questions mises à jour enregistrés');
+          this.router.navigate(['/']);
         },
         (error) => {
           console.error('Erreur lors de la mise à jour du quiz:', error);
