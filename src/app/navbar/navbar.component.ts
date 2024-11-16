@@ -10,7 +10,9 @@ import { Link } from "models/links.model";
 export class NavbarComponent {
   links: Link[] = [
     { name: "Accueil", href: "" },
-    { name: "Quiz", href: "quiz" }
+    { name: "Quiz", href: "quiz" },
+    { name: "Edit", href: "edit" }
+
   ];
   isAuthenticated: boolean = false; // Gestion de l'état de connexion
   showDropdown: boolean = false; // État du menu déroulant

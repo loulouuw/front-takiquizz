@@ -1,0 +1,67 @@
+<div class="edit-quiz-container">
+  <h1>Édition des Quiz</h1>
+
+  <!-- Liste déroulante pour sélectionner un quiz -->
+  <div class="form-group">
+    <label for="quizSelect">Choisissez un quiz à éditer</label>
+    <select id="quizSelect" class="form-control" (change)="onQuizSelect($event)">
+      <option value="">-- Sélectionner un quiz --</option>
+      <option *ngFor="let quiz of quizzes" [value]="quiz.id">{{ quiz.title }}</option>
+    </select>
+  </div>
+
+  <!-- Si un quiz est sélectionné, afficher ses détails -->
+  <div *ngIf="selectedQuiz" class="quiz-details">
+    <h2>Informations de : {{ selectedQuiz.title }}</h2>
+
+    <!-- Informations du quiz affichées -->
+    <div class="form-group">
+      <label for="quizTitle">Titre</label>
+      <input id="quizTitle" type="text" class="form-control" [(ngModel)]="selectedQuiz.title" name="title"/>
+    </div>
+
+    <div class="form-group">
+      <label for="quizDescription">Description</label>
+      <textarea id="quizDescription" class="form-control" [(ngModel)]="selectedQuiz.description" name="description"></textarea>
+    </div>
+
+    <!-- Affichage des questions du quiz -->
+    <div *ngIf="selectedQuiz.questions && selectedQuiz.questions.length > 0">
+      <h3>Questions</h3>
+      <div *ngFor="let question of selectedQuiz.questions; let i = index" class="question-card">
+        <h4>Question {{ i + 1 }}</h4>
+
+        <div class="form-group">
+          <label for="questionStatement{{ i }}">Question</label>
+          <input id="questionStatement{{ i }}" type="text" class="form-control" [(ngModel)]="question.statement" name="questionStatement{{ i }}"/>
+        </div>
+
+        <div class="form-group">
+          <label for="correctAnswer{{ i }}">Réponse correcte</label>
+          <input id="correctAnswer{{ i }}" type="text" class="form-control" [(ngModel)]="question.correctAnswer" name="correctAnswer{{ i }}"/>
+        </div>
+
+        <div class="form-group">
+          <label for="incorrectAnswers{{ i }}">Réponses incorrectes</label>
+          <input id="incorrectAnswers{{ i }}" type="text" class="form-control" [(ngModel)]="question.incorrectAnswers" name="incorrectAnswers{{ i }}"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option pour ajouter de nouvelles questions -->
+    <div class="form-group">
+      <button class="btn btn-secondary" (click)="addQuestion()">Ajouter une question</button>
+    </div>
+
+    <!-- Boutons pour sauvegarder ou supprimer le quiz -->
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="saveQuiz()">Enregistrer les modifications</button>
+      <button class="btn btn-danger" (click)="onDelete()">Supprimer ce quiz</button>
+    </div>
+  </div>
+
+  <!-- Si aucun quiz n'est sélectionné, afficher un message -->
+  <div *ngIf="!selectedQuiz">
+    <p>Sélectionnez un quiz pour afficher ses informations.</p>
+  </div>
+</div>

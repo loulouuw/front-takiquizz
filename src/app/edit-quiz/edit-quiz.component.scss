@@ -1,0 +1,26 @@
+/* edit-quiz.component.scss */
+.edit-quiz-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .quiz-details {
+    margin-top: 30px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      margin-right: 10px;
+    }
+  }
+}

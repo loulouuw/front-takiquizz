@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { QuizDetailComponent } from './quiz-detail/quiz-detail.component';
 import { ShufflePipe } from './shuffle.pipe';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { EditQuizComponent } from './edit-quiz/edit-quiz.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CreateQuizComponent } from './create-quiz/create-quiz.component';
     QuizDetailComponent,
     ShufflePipe,
     CreateQuizComponent,
+    EditQuizComponent,
   ],
   imports: [
     BrowserModule,
