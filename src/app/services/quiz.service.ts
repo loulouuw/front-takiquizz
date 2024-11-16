@@ -25,8 +25,11 @@ export class QuizService {
   }
 
   saveQuestions(questions: Question): Observable<any> {
-    console.log(questions)
     return this.http.post<any>(`http://localhost:8080/questions`, questions)
+  }
+
+  deleteQuestion(id: number | undefined): Observable<void> {
+    return this.http.delete<void>(`http://localhost:8080/questions/${id}`)
   }
 
   deleteQuiz(id: number): Observable<void> {

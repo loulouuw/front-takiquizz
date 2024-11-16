@@ -1,6 +1,6 @@
 export interface Question {
 
-  idQuiz?: number;
+  id?: number;
   statement: string;
   correctAnswer: string;
   questionType: string;

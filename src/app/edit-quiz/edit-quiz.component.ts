@@ -60,10 +60,34 @@ export class EditQuizComponent implements OnInit {
 
   // Supprimer une question
   removeQuestion(index: number): void {
-    if (this.selectedQuiz) {
-      this.selectedQuiz.questions.splice(index, 1);
+    console.log(`Tentative de suppression de la question à l'index ${index}`);
+
+    if (this.selectedQuiz && this.selectedQuiz.questions[index]) {
+      const questionToDelete = this.selectedQuiz.questions[index];
+      console.log(`Question à supprimer :`, questionToDelete);
+
+      if (questionToDelete.quizzId) { // Utilise quizzId ici
+        // Si la question a un quizzId, supprimer la question du backend
+        this.quizService.deleteQuestion(questionToDelete.id).subscribe(
+          () => {
+            console.log(`Question ${index + 1} supprimée avec succès.`);
+            // Supprimer la question localement après suppression réussie dans la BDD
+            this.selectedQuiz!.questions.splice(index, 1);
+          },
+          (error) => {
+            console.error(`Erreur lors de la suppression de la question ${index + 1}`, error);
+          }
+        );
+      } else {
+        // Si la question est une nouvelle question (sans quizzId), simplement la supprimer localement
+        console.log(`La question est une nouvelle question, suppression locale.`);
+        this.selectedQuiz!.questions.splice(index, 1);
+      }
+    } else {
+      console.error(`La question à l'index ${index} n'a pas été trouvée.`);
     }
   }
+
 
   // Enregistrer les modifications du quiz et ses questions
   saveQuiz(): void {
